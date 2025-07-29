@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>  Smart Choise  - Login</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(-45deg, #063fdd, #ff00dd, #00ffea, #a01494);
+    background-size: 400% 400%;
+    animation: gradienteAnimado 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+@keyframes gradienteAnimado {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+        .login-container {
+            background-color: rgb(43, 42, 42);
+            padding: 90px 90px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 720px;
+        }
+        h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fdfdfd;
+    animation: piscar 1s infinite;
+}
+
+@keyframes piscar {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+        label {
+            display: block;
+            text-align: center;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #ffffff;
+        }
+        input {
+            width: 100%;
+            padding: 8px 6px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            border: none;
+            background-color: #4a90e2;
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #357ABD;
+        }
+        a {
+            display: block;
+            margin-top: 15px;
+            text-align: center;
+            color: #4a90e2;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .botao-confirmacao {
+            display: block;      
+             margin: 25px auto 0; 
+             width: 250px;        
+             color: rgb(5, 5, 5);
+             background-color: rgb(32, 167, 32);
+            }
+
+
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Smart Choice</h1>
+        <form method="POST">
+            {{ form.csrf_token }}
+
+            <label for="email">{{ form.email.label.text }}</label>
+            {{ form.email() }}
+
+            <label for="senha">{{ form.senha.label.text }}</label>
+            {{ form.senha() }}
+
+            {{ form.botao_confirmacao(class_="botao-confirmacao") }}
+        </form>
+        <a href="{{ url_for('cadastro') }}">Não tem conta? Tá perdendo!</a>
+    </div>
+</body>
+</html>
+

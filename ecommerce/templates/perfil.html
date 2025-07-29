@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Perfil do Usuário - SóNaTeoria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 30px auto;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        p.welcome {
+            text-align: center;
+            color: #555;
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        h2 {
+            color: #007BFF;
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: white;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        thead th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .empty-message {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            font-size: 1.1rem;
+            margin-top: 40px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        a.btn-logout, a.btn-vitrine {
+            flex: 1;
+            max-width: 180px;
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            padding: 12px 0;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.4);
+        }
+
+        a.btn-logout:hover, a.btn-vitrine:hover {
+            background-color: #218838;
+            box-shadow: 0 6px 15px rgba(33, 136, 56, 0.6);
+        }
+
+        /* Novo botão "Adicionar Produto" */
+        a.btn-adicionar {
+            flex: 1;
+            max-width: 180px;
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            padding: 12px 0;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+        }
+        a.btn-adicionar:hover {
+            background-color: #0056b3;
+            box-shadow: 0 6px 15px rgba(0, 86, 179, 0.6);
+        }
+
+        /* Responsivo */
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+
+            th, td {
+                padding: 10px 8px;
+                font-size: 14px;
+            }
+
+            .btn-container {
+                flex-direction: column;
+            }
+
+            a.btn-logout, a.btn-vitrine, a.btn-adicionar {
+                max-width: 100%;
+                padding: 12px 0;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Olá, {{ usuario }}!</h1>
+    <p class="welcome">Bem-vindo ao seu perfil de compras.</p>
+
+    <h2>Carrinho de Compras</h2>
+
+    {% if carrinho and carrinho|length > 0 %}
+    <table>
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Preço Unitário</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in carrinho %}
+            <tr>
+                <td>{{ item.produto.nome }}</td>
+                <td>{{ item.quantidade }}</td>
+                <td>R$ {{ '%.2f'|format(item.produto.valor) }}</td>
+                <td>R$ {{ '%.2f'|format(item.total) }}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="empty-message">Seu carrinho está vazio.</p>
+    {% endif %}
+
+    <div class="btn-container">
+        <a href="{{ url_for('logout') }}" class="btn-logout" title="Sair da conta">Sair</a>
+        <a href="{{ url_for('vitrine') }}" class="btn-vitrine" title="Ir para a vitrine">Vitrine</a>
+        <a href="{{ url_for('adicionar_produto') }}" class="btn-adicionar" title="Adicionar novo produto">➕ Adicionar Produto</a>
+    </div>
+</body>
+</html>
+
+

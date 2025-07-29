@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro do Usuário</title>
+    <style>
+         body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(-45deg, #063fdd, #ff00dd, #00ffea, #a01494);
+    background-size: 400% 400%;
+    animation: gradienteAnimado 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+@keyframes gradienteAnimado {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+        h1 {
+            margin: 100px;;
+            text-align: center;
+            color: #383838;
+            animation: piscar 2s infinite;
+        }
+        @keyframes piscar {
+        50%, 100% {
+            opacity: 5;
+        }
+        50% {
+            opacity: 0.5;
+        }
+    }
+
+        form {
+            background: rgb(43, 42, 42);
+            padding: 60px 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            width: 320px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            padding: 10px 0;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: block;
+            margin-top: 15px;
+            text-align: center;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .subtitulo {
+    color: #292828;
+    font-size: 18px;
+    text-align: center;
+    margin-top: -80px;
+    margin-bottom: 30px;
+    font-weight: 400;
+    animation: aparecer 1s ease-in-out;
+}
+
+
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+    </style>
+</head>
+<body>
+  <div class="cabecalho">
+    <h1>Cadastro do Usuário</h1>
+    <h1 class="subtitulo">Manda teus dados e vem com a gente</h1>
+</div>
+
+
+    <form method="POST">
+        {{ form.csrf_token }}
+        
+        <p>
+            {{ form.email.label }}
+            {{ form.email(size=32) }}
+        </p>
+
+        <p>
+            {{ form.username.label }}
+            {{ form.username(size=32) }}
+        </p>
+
+        <p>
+            {{ form.senha.label }}
+            {{ form.senha(size=32) }}
+        </p>
+
+        <p>
+            {{ form.confirmacao_senha.label }}
+            {{ form.confirmacao_senha(size=32) }}
+        </p>
+    
+
+        <p>
+            {{ form.botao_confirmacao() }}
+            <a href="{{ url_for('homepage') }}">Início</a>
+        </p>
+    </form>
+
+   
+</body>
+</html>
