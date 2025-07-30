@@ -26,6 +26,7 @@ class Produto(databse.Model):
     id = databse.Column(databse.Integer, primary_key=True)
     nome = databse.Column(databse.String(100), nullable=True)
     valor = databse.Column(databse.Float, nullable=True)
+    usuario_nome = databse.Column(databse.String(50), nullable=True)
 
     # Chave estrangeira ligando ao usuário
     usuario_id = databse.Column(databse.Integer, databse.ForeignKey('usuario.id'), nullable=False)

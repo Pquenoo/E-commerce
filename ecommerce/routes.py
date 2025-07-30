@@ -111,7 +111,8 @@ def adicionar_produto():
         novo_produto = Produto(
             nome=form.nome.data,
             valor=form.valor.data,
-            usuario=current_user
+            usuario=current_user,
+             usuario_nome=current_user.username
         )
         databse.session.add(novo_produto)
         databse.session.commit()
